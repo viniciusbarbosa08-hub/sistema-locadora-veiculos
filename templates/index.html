@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Frota da Locadora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    
+    <h2>🚗 Frota da Locadora - Gestão de Contratos</h2>
+    <hr>
+
+    <!-- Formulário de Nova Locação -->
+    <h4>Nova Locação</h4>
+    <form action="/adicionar" method="POST" class="row g-3 mb-5">
+        <div class="col-auto">
+            <input type="number" class="form-control" name="veiculo_id" placeholder="ID do Veículo (ex: 1)" required>
+        </div>
+        <div class="col-auto">
+            <input type="number" class="form-control" name="cliente_id" placeholder="ID do Cliente (ex: 1)" required>
+        </div>
+        <div class="col-auto">
+            <input type="date" class="form-control" name="data_inicio" required>
+        </div>
+        <div class="col-auto">
+            <input type="date" class="form-control" name="data_fim" required>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-success">Gravar no Banco</button>
+        </div>
+    </form>
+
+    <!-- Tabela de Locações Ativas -->
+    <h4>Relatório de Locações Ativas</h4>
+    <table class="table table-bordered table-striped bg-white mt-3">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Veículo</th>
+                <th>Data Início</th>
+                <th>Data Fim</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- O Flask vai injetar os dados aqui -->
+            {% for l in locacoes %}
+            <tr>
+                <td>{{ l.id }}</td>
+                <td>{{ l.cliente_nome }}</td>
+                <td>{{ l.veiculo_modelo }}</td>
+                <td>{{ l.data_inicio }}</td>
+                <td>{{ l.data_fim }}</td>
+                <td>
+                    <form action="/editar/{{ l.id }}" method="POST" style="display:inline;" class="me-2">
+                        <input type="date" name="nova_data_fim" class="form-control form-control-sm d-inline w-auto" required>
+                        <button type="submit" class="btn btn-sm btn-warning">Alterar Data</button>
+                    </form>
+                    <form action="/excluir/{{ l.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center">Nenhuma locação cadastrada ainda.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

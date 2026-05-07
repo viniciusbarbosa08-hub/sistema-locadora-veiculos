@@ -1,0 +1,28 @@
+# Projeto: Sistema de Gestão para Locadora de Veículos
+
+## Alunos
+- Vinícius Barbosa (01770124)
+- Mario Marcelino (01796910)
+- Paulo Bezerra (01798569)
+
+## Pré-requisitos
+Certifique-se de ter o Python e o MySQL instalados.
+Instale as bibliotecas necessárias executando o comando abaixo no terminal:
+`pip install flask fastapi uvicorn pydantic mysql-connector-python`
+
+## Como executar o projeto
+
+### 1. Configurar a Base de Dados
+1. Abra o MySQL Workbench.
+2. Execute o ficheiro `database.sql` anexo a este projeto para criar a base de dados (`locadora_veiculos`), as tabelas e inserir os dados iniciais de teste.
+3. Se necessário, atualize a palavra-passe (senha) de conexão com o MySQL nos ficheiros `app_flask.py` e `api_fast.py` (variável de conexão com o banco).
+
+### 2. Executar a Interface Web (Flask)
+1. Abra o terminal na pasta do projeto.
+2. Execute o comando: `python app_flask.py`
+3. Abra o navegador e aceda a: http://127.0.0.1:5000
+
+### 3. Executar a API (FastAPI)
+1. Abra um novo terminal na pasta do projeto.
+2. Execute o comando: `python -m uvicorn api_fast:app --reload`
+3. Abra o navegador e aceda à documentação Swagger em: http://127.0.0.1:8000/docs
